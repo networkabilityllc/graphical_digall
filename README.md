@@ -12,6 +12,7 @@ This application uses tkinter and bindutils. In windows, you will need to instal
 choco install bind-toolsonly.
 
 To run the program, clone the repository.
+
 Windows: start python .\graphical_digall.py
 Linux: python .\graphical_digall.py &
 ## License
