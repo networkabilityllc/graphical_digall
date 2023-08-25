@@ -1,20 +1,20 @@
-# DigAll Graphical Interface
+# DigAll Graphical Interface 🌐
 
-This project provides a graphical interface for the `digall` script, allowing users to retrieve DNS information with a user-friendly interface, and save that information to a text file.
+`DigAll` gets a facelift! Dive into DNS information retrieval with an enhanced, user-friendly graphical interface. Not only can you query for DNS details but also save that data effortlessly to a text file.
 
-## Credit
+## 🙌 Acknowledgements 
 
-The original `digall` bash script was created by [FreedomBen](https://github.com/FreedomBen/digall). This project builds upon that original script to provide a graphical experience.
+Kudos to [FreedomBen](https://github.com/FreedomBen/digall) for crafting the initial `digall` bash script. This project aims to rejuvenate and extend that stellar work into a visually engaging experience.
 
-## Usage
+## 🚀 Getting Started
 
-This application uses tkinter and bindutils. In windows, you will need to install bind utils. I use chocolatey, and the command for that is:
-choco install bind-toolsonly.
+### Prerequisites:
 
-To run the program, clone the repository.
-Windows: start python .\graphical_digall.py
-Linux: python .\graphical_digall.py &
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
+- **Tkinter**: This is typically bundled with most standard Python installations.
+  
+- **Bindutils**: Essential for DNS operations.
+  
+  On Windows, Bindutils isn't bundled by default. Here's how to get it up and running:
+  ```bash
+  # If you're a Chocolatey user:
+  choco install bind-toolsonly
