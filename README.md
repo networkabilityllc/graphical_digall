@@ -11,12 +11,12 @@ The original `digall` bash script was created by [FreedomBen](https://github.com
 This application uses tkinter and bindutils. In windows, you will need to install bind utils. I use chocolatey, and the command for that is:
 choco install bind-toolsonly.
 
-To run the program, clone the repository.
+To run the program, clone the repository: https://github.com/networkabilityllc/graphical_digall
 
 
 Windows: start python .\graphical_digall.py
 
-Linux: python .\graphical_digall.py &
+Linux: python3 .\graphical_digall.py &
 
 ## License
 
