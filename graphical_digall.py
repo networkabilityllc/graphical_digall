@@ -9,22 +9,21 @@ TAG_LIGHT_BLUE = 'light_blue'
 TAG_LIGHT_CYAN = 'light_cyan'
 TAG_RESTORE = 'restore'
 
-def run_dig(domain, text_widget):
+def run_dig(domain, nameserver, text_widget):
     # Clear the text_widget content
     text_widget.delete(1.0, tk.END)
     
-    text_widget.insert(tk.END, "Queries: (dig +noall +answer '{0}' '<type>')...\n".format(domain), TAG_LIGHT_BLUE)
+    text_widget.insert(tk.END, f"Queries: (dig +noall +answer '{domain}' '<type>') using nameserver {nameserver}...\n", TAG_LIGHT_BLUE)
     
     for t in ["SOA", "NS", "SPF", "TXT", "MX", "AAAA", "A"]:
-        text_widget.insert(tk.END, "Querying for {0} records...\n".format(t), TAG_LIGHT_GREEN)
+        text_widget.insert(tk.END, f"Querying for {t} records...\n", TAG_LIGHT_GREEN)
         
-        # Run the dig command using subprocess
+        # Run the dig command using subprocess with the specified nameserver
         try:
-            result = subprocess.run(["dig", "+noall", "+answer", domain, t], capture_output=True, text=True)
+            result = subprocess.run(["dig", "+noall", "+answer", f"@{nameserver}", domain, t], capture_output=True, text=True)
             text_widget.insert(tk.END, result.stdout + '\n')
         except Exception as e:
-            text_widget.insert(tk.END, "Error running dig command: {0}\n".format(e), TAG_RED)
-
+            text_widget.insert(tk.END, f"Error running dig command: {e}\n", TAG_RED)
 
 def save_data(text_widget):
     file_path = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt"), ("All files", "*.*")])
@@ -60,8 +59,17 @@ def main():
     domain_entry.pack(pady=10)
     domain_entry.focus_set()
 
+    # Label widget for specifying DNS server
+    nameserver_label = tk.Label(frame, text="Specify DNS Server to Query:", bg='#333333', fg='#E0E0E0')
+    nameserver_label.pack(pady=(10, 0))
+
+    # Entry widget with dark theme for nameserver input
+    nameserver_entry = tk.Entry(frame, width=40, bg='#2E2E2E', fg='#E0E0E0', insertbackground='white')
+    nameserver_entry.pack(pady=10)
+    nameserver_entry.insert(0, "8.8.8.8")  # Default nameserver
+
     # Dig button with dark theme
-    dig_button = tk.Button(frame, text="Run DigAll", command=lambda: run_dig(domain_entry.get(), text_widget), bg='#444444', fg='#E0E0E0', activebackground='#555555', activeforeground='#E0E0E0')
+    dig_button = tk.Button(frame, text="Run DigAll", command=lambda: run_dig(domain_entry.get(), nameserver_entry.get(), text_widget), bg='#444444', fg='#E0E0E0', activebackground='#555555', activeforeground='#E0E0E0')
     dig_button.pack(pady=(0, 5))
 
     # Save Data button with dark theme
